@@ -49,5 +49,6 @@ mod tests {
 
 		assert_eq!(system.block_number(), 1);
 		assert_eq!(system.nonce.get(&"alice".to_string()), Some(&1));
+		assert_eq!(system.nonce.get(&"bob".to_string()), None);
 	}
 }

@@ -18,17 +18,16 @@ impl Pallet {
 	}
 
 	fn transfer(&mut self, from: &String, to: &String, amount: u128) -> Result<(), &'static str> {
-		// old balance - from
+		// get the old balances
 		let from_old_balance = self.balance(from);
 		let to_old_balance = self.balance(to);
 
 		// calculate the new balances
 		let from_new_balance =
 			from_old_balance.checked_sub(amount).ok_or("Insufficient balance")?;
-
 		let to_new_balance = to_old_balance.checked_add(amount).ok_or("Exceeds MAX balance")?;
 
-		// set the balances
+		// set the new balances
 		self.set_balance(from, from_new_balance);
 		self.set_balance(to, to_new_balance);
 
