@@ -9,15 +9,20 @@ impl Pallet {
 		Self { balances: BTreeMap::new() }
 	}
 
-	fn set_balance(&mut self, who: &String, balance: u128) {
+	pub fn set_balance(&mut self, who: &String, balance: u128) {
 		self.balances.insert(who.clone(), balance);
 	}
 
-	fn balance(&self, who: &String) -> u128 {
+	pub fn balance(&self, who: &String) -> u128 {
 		*self.balances.get(who).unwrap_or(&0)
 	}
 
-	fn transfer(&mut self, from: &String, to: &String, amount: u128) -> Result<(), &'static str> {
+	pub fn transfer(
+		&mut self,
+		from: &String,
+		to: &String,
+		amount: u128,
+	) -> Result<(), &'static str> {
 		// get the old balances
 		let from_old_balance = self.balance(from);
 		let to_old_balance = self.balance(to);

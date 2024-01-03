@@ -12,17 +12,17 @@ impl Pallet {
 		Self { block_number: 0, nonce: BTreeMap::new() }
 	}
 
-	fn block_number(&self) -> u32 {
+	pub fn block_number(&self) -> u32 {
 		self.block_number
 	}
 
-	fn inc_block_number(&mut self) -> Result<(), &'static str> {
+	pub fn inc_block_number(&mut self) -> Result<(), &'static str> {
 		self.block_number = self.block_number.checked_add(1).ok_or("Exceeded u32 MAX")?;
 
 		Ok(())
 	}
 
-	fn inc_nonce(&mut self, who: &String) -> Result<(), &'static str> {
+	pub fn inc_nonce(&mut self, who: &String) -> Result<(), &'static str> {
 		let new_nonce =
 			self.nonce.get(who).unwrap_or(&0).checked_add(1).ok_or("Exceeded u32 MAX")?;
 
